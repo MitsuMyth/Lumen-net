@@ -1,0 +1,983 @@
+.lebanese-map-page {
+  padding-top: 70px;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0B1E34 0%, #1a3a52 100%);
+}
+
+.map-container {
+  height: calc(100vh - 70px);
+  position: relative;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  background: var(--dark-navy);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Enhanced Map Controls - Lebanese themed */
+.map-controls {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(11, 30, 52, 0.95);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  min-width: 280px;
+  z-index: 500;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.map-controls:hover {
+  box-shadow: 0 20px 60px rgba(0, 255, 127, 0.2);
+}
+
+.map-controls h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  text-align: center;
+  background: linear-gradient(135deg, #00ff7f, #3BE8B0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Quick Filters */
+.filter-section {
+  margin-bottom: 2rem;
+}
+
+.filter-section h4 {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.filter-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.filter-btn:hover {
+  background: rgba(0, 255, 127, 0.1);
+  border-color: rgba(0, 255, 127, 0.3);
+  color: #ffffff;
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #00ff7f, #3BE8B0);
+  border-color: #00ff7f;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 255, 127, 0.3);
+}
+
+/* Layer Section */
+.layer-section h4 {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.reset-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #58B1F0, #3BE8B0);
+  border: none;
+  color: #ffffff;
+  padding: 0.8rem 1rem;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(88, 177, 240, 0.3);
+}
+
+.reset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(88, 177, 240, 0.4);
+}
+
+.control-group {
+  margin-bottom: 1.2rem;
+}
+
+.control-group:last-child {
+  margin-bottom: 0;
+}
+
+/* Enhanced Toggle Switch */
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.toggle-switch:hover {
+  background: rgba(59, 232, 176, 0.05);
+}
+
+.toggle-switch input {
+  display: none;
+}
+
+.slider {
+  position: relative;
+  width: 55px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 34px;
+  transition: 0.3s;
+  border: 2px solid rgba(59, 232, 176, 0.3);
+}
+
+.slider::before {
+  content: '';
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 2px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch input:checked + .slider {
+  background: linear-gradient(135deg, #00ff7f 0%, #3BE8B0 100%);
+  border-color: #00ff7f;
+  box-shadow: 0 0 15px rgba(0, 255, 127, 0.3);
+}
+
+.toggle-switch input:checked + .slider::before {
+  transform: translateX(27px);
+  background: #ffffff;
+}
+
+.label-text {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Enhanced Info Panel - Lebanese themed */
+.info-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 380px;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+  background: rgba(11, 30, 52, 0.95);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  z-index: 500;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.info-panel h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-align: center;
+  background: linear-gradient(135deg, #00ff7f, #3BE8B0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.info-subtitle {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Enhanced Lebanon Statistics Cards */
+.lebanon-stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, rgba(0, 255, 127, 0.1), rgba(59, 232, 176, 0.1));
+  border: 1px solid rgba(0, 255, 127, 0.3);
+  border-radius: 15px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 255, 127, 0.2);
+}
+
+.stat-card.marine {
+  border-color: rgba(0, 255, 127, 0.4);
+  background: linear-gradient(135deg, rgba(0, 255, 127, 0.15), rgba(59, 232, 176, 0.1));
+}
+
+.stat-card.freshwater {
+  border-color: rgba(88, 177, 240, 0.4);
+  background: linear-gradient(135deg, rgba(88, 177, 240, 0.15), rgba(59, 232, 176, 0.1));
+}
+
+.stat-card.protected {
+  border-color: rgba(255, 165, 0, 0.4);
+  background: linear-gradient(135deg, rgba(255, 165, 0, 0.15), rgba(59, 232, 176, 0.1));
+}
+
+.stat-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #00ff7f;
+  margin-bottom: 0.3rem;
+}
+
+.stat-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.3rem;
+}
+
+.stat-note {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.legend {
+  margin-bottom: 2rem;
+}
+
+.legend h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.legend-color {
+  width: 35px;
+  height: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.legend-item span {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+/* Ecosystem Types */
+.ecosystem-types {
+  margin-top: 1.5rem;
+}
+
+.type-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.type-icon {
+  font-size: 1.3rem;
+}
+
+/* Location Info - Enhanced */
+.location-info {
+  background: linear-gradient(135deg, rgba(0, 255, 127, 0.05), rgba(59, 232, 176, 0.05));
+  border: 2px solid rgba(0, 255, 127, 0.3);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  animation: slideInFromRight 0.4s ease-out;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.back-button {
+  background: linear-gradient(135deg, #00ff7f, #3BE8B0);
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 255, 127, 0.3);
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 127, 0.4);
+}
+
+.location-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.location-icon {
+  font-size: 2rem;
+}
+
+.location-header h4 {
+  font-size: 1.3rem;
+  margin: 0;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.info-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00ff7f;
+}
+
+/* Environmental Data Grid */
+.environmental-data {
+  margin-bottom: 1.5rem;
+}
+
+.environmental-data h5 {
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.data-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.data-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.data-value {
+  font-size: 0.9rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Species and Threats Grids */
+.species-grid, .threats-grid, .conservation-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+.species-item, .threat-item, .conservation-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.species-bullet {
+  font-size: 1rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.threat-bullet {
+  font-size: 0.9rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.conservation-bullet {
+  font-size: 1rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Conservation Efforts Section */
+.conservation-efforts {
+  margin-bottom: 1.5rem;
+}
+
+.conservation-efforts h5 {
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Animated Markers */
+.animated-marker {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Custom Popup Styling */
+.custom-popup .leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  border: 2px solid rgba(0, 255, 127, 0.3);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.custom-popup .leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.stat-badge {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+
+.stat-badge.protected {
+  background: rgba(0, 255, 127, 0.2);
+  color: #00ff7f;
+  border: 1px solid #00ff7f;
+}
+
+.stat-badge.proposed {
+  background: rgba(88, 177, 240, 0.2);
+  color: #58B1F0;
+  border: 1px solid #58B1F0;
+}
+
+.stat-badge.threatened {
+  background: rgba(255, 165, 0, 0.2);
+  color: #FFA500;
+  border: 1px solid #FFA500;
+}
+
+.stat-badge.critical {
+  background: rgba(242, 92, 84, 0.2);
+  color: #F25C54;
+  border: 1px solid #F25C54;
+}
+
+.stat-badge.endemic {
+  background: rgba(147, 51, 234, 0.2);
+  color: #9333EA;
+  border: 1px solid #9333EA;
+}
+
+.stat-badge.natural {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22C55E;
+  border: 1px solid #22C55E;
+}
+
+.stat-badge.polluted {
+  background: rgba(239, 68, 68, 0.2);
+  color: #EF4444;
+  border: 1px solid #EF4444;
+}
+
+.location-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+}
+
+/* Key Species & Threats */
+.key-species, .threats {
+  margin-bottom: 1.5rem;
+}
+
+.key-species h5, .threats h5 {
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.key-species ul, .threat-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.key-species li {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.key-species li::before {
+  content: '🌿';
+  position: absolute;
+  left: 0;
+  font-size: 1rem;
+}
+
+.threat-list li {
+  font-size: 0.9rem;
+  color: rgba(255, 165, 0, 0.9);
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.threat-list li::before {
+  content: '⚠️';
+  position: absolute;
+  left: 0;
+  font-size: 0.9rem;
+}
+
+/* Lebanon Facts */
+.lebanon-facts {
+  background: linear-gradient(135deg, rgba(0, 255, 127, 0.05), rgba(59, 232, 176, 0.05));
+  border: 1px solid rgba(0, 255, 127, 0.2);
+  border-radius: 15px;
+  padding: 1.5rem;
+}
+
+.lebanon-facts h4 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #00ff7f;
+  font-weight: 600;
+}
+
+.lebanon-facts ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.lebanon-facts li {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.lebanon-facts li::before {
+  content: '🇱🇧';
+  position: absolute;
+  left: 0;
+  font-size: 1rem;
+}
+
+/* Leaflet overrides for Lebanon theme */
+.leaflet-container {
+  background: linear-gradient(135deg, #0B1E34 0%, #1a3a52 100%);
+  font-family: 'Poppins', sans-serif;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(11, 30, 52, 0.95);
+  color: #ffffff;
+  border: 2px solid rgba(0, 255, 127, 0.3);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.leaflet-popup-tip {
+  background: rgba(11, 30, 52, 0.95);
+}
+
+.leaflet-control-zoom a {
+  background: rgba(11, 30, 52, 0.95);
+  color: #00ff7f;
+  border: 1px solid rgba(0, 255, 127, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.leaflet-control-zoom a:hover {
+  background: rgba(0, 255, 127, 0.1);
+}
+
+/* Scrollbar styling */
+.info-panel::-webkit-scrollbar {
+  width: 10px;
+}
+
+.info-panel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.info-panel::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #00ff7f, #3BE8B0);
+  border-radius: 10px;
+}
+
+.info-panel::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #3BE8B0, #00ff7f);
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 1024px) {
+  .map-controls {
+    top: 10px;
+    left: 10px;
+    right: auto;
+    width: 280px;
+    padding: 1.5rem;
+  }
+  
+  .info-panel {
+    top: auto;
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    width: auto;
+    max-width: none;
+    max-height: 50vh;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .lebanese-map-page {
+    padding-top: 0;
+  }
+
+  .map-container {
+    height: 100vh;
+  }
+
+  .map-controls {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    min-width: auto;
+    padding: 0.8rem;
+    z-index: 1000;
+    max-height: 25vh;
+    overflow-y: auto;
+  }
+  
+  .info-panel {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: auto;
+    max-width: none;
+    max-height: 35vh;
+    border-radius: 15px 15px 0 0;
+    padding: 1rem;
+    z-index: 1000;
+    border-bottom: none;
+  }
+
+  .filter-buttons {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem;
+  }
+
+  .filter-btn {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .lebanon-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .info-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .data-grid {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+
+  .species-grid, .threats-grid, .conservation-grid {
+    gap: 0.2rem;
+  }
+
+  .species-item, .threat-item, .conservation-item {
+    padding: 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .stat-card {
+    padding: 0.8rem;
+  }
+
+  .stat-card .stat-content {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 1.2rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .stat-note {
+    font-size: 0.7rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .map-controls h3,
+  .info-panel h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .filter-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-btn {
+    padding: 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .stat-number {
+    font-size: 1.1rem;
+  }
+
+  .location-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.3rem;
+  }
+
+  .location-icon {
+    font-size: 1.3rem;
+  }
+
+  .info-panel {
+    max-height: 40vh;
+    padding: 0.8rem;
+  }
+
+  .map-controls {
+    padding: 0.6rem;
+    max-height: 20vh;
+  }
+
+  .location-info {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+  }
+
+  .info-stats {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    padding: 0.6rem;
+  }
+
+  .environmental-data h5,
+  .key-species h5,
+  .threats h5,
+  .conservation-efforts h5 {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .data-item,
+  .species-item,
+  .threat-item,
+  .conservation-item {
+    padding: 0.4rem;
+    font-size: 0.7rem;
+  }
+
+  .data-grid {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .location-description {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+  }
+
+  .lebanon-facts ul {
+    font-size: 0.7rem;
+    line-height: 1.3;
+  }
+
+  .lebanon-facts {
+    padding: 0.8rem;
+  }
+
+  .stat-card {
+    padding: 0.6rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .stat-icon {
+    font-size: 1.5rem;
+  }
+}
+
+/* Prevent text overflow issues */
+.location-info,
+.lebanon-stats,
+.legend,
+.environmental-data,
+.key-species,
+.threats,
+.conservation-efforts,
+.lebanon-facts {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.location-description,
+.species-item span,
+.threat-item span,
+.conservation-item span {
+  word-break: break-word;
+  hyphens: auto;
+}

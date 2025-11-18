@@ -1,0 +1,362 @@
+.map-page {
+  padding-top: 70px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.map-container {
+  height: calc(100vh - 70px);
+  position: relative;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  background: var(--dark-navy);
+}
+
+/* Map Controls */
+.map-controls {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(11, 30, 52, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 232, 176, 0.2);
+  border-radius: 15px;
+  padding: 1.5rem;
+  min-width: 250px;
+  z-index: 500;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.map-controls h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--cyan);
+}
+
+.control-group {
+  margin-bottom: 1rem;
+}
+
+.control-group:last-child {
+  margin-bottom: 0;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.toggle-switch input {
+  display: none;
+}
+
+.slider {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 34px;
+  transition: 0.3s;
+  border: 1px solid rgba(59, 232, 176, 0.3);
+}
+
+.slider::before {
+  content: '';
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 3px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.toggle-switch input:checked + .slider {
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--light-blue) 100%);
+  border-color: var(--cyan);
+}
+
+.toggle-switch input:checked + .slider::before {
+  transform: translateX(24px);
+  background: white;
+}
+
+.label-text {
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+/* Info Panel */
+.info-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 350px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  background: rgba(11, 30, 52, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 232, 176, 0.2);
+  border-radius: 15px;
+  padding: 1.5rem;
+  z-index: 500;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.info-panel h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--cyan);
+}
+
+.info-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.legend {
+  margin-bottom: 2rem;
+}
+
+.legend h4 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-light);
+}
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.legend-color {
+  width: 30px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.legend-item span {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+/* Region Info */
+.region-info {
+  background: rgba(59, 232, 176, 0.05);
+  border: 1px solid rgba(59, 232, 176, 0.2);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: var(--cyan);
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  padding: 0;
+  font-family: inherit;
+  transition: opacity 0.3s;
+}
+
+.back-button:hover {
+  opacity: 0.7;
+}
+
+.region-info h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--cyan);
+}
+
+.info-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat:last-child {
+  grid-column: 1 / -1;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--cyan);
+}
+
+.stat-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.stat-badge.low {
+  background: rgba(59, 232, 176, 0.2);
+  color: var(--cyan);
+  border: 1px solid var(--cyan);
+}
+
+.stat-badge.medium {
+  background: rgba(88, 177, 240, 0.2);
+  color: var(--light-blue);
+  border: 1px solid var(--light-blue);
+}
+
+.stat-badge.high {
+  background: rgba(255, 165, 0, 0.2);
+  color: #FFA500;
+  border: 1px solid #FFA500;
+}
+
+.stat-badge.critical {
+  background: rgba(242, 92, 84, 0.2);
+  color: var(--accent-red);
+  border: 1px solid var(--accent-red);
+}
+
+.region-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Quick Facts */
+.quick-facts {
+  background: rgba(88, 177, 240, 0.05);
+  border: 1px solid rgba(88, 177, 240, 0.2);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.quick-facts h4 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--light-blue);
+}
+
+.quick-facts ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quick-facts li {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.quick-facts li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--light-blue);
+  font-weight: 700;
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+  background: var(--dark-navy);
+  font-family: 'Poppins', sans-serif;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(11, 30, 52, 0.95);
+  color: var(--text-light);
+  border: 1px solid rgba(59, 232, 176, 0.3);
+  border-radius: 10px;
+}
+
+.leaflet-popup-tip {
+  background: rgba(11, 30, 52, 0.95);
+}
+
+.leaflet-control-zoom a {
+  background: rgba(11, 30, 52, 0.95);
+  color: var(--cyan);
+  border: 1px solid rgba(59, 232, 176, 0.2);
+}
+
+/* Scrollbar */
+.info-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.info-panel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.info-panel::-webkit-scrollbar-thumb {
+  background: var(--cyan);
+  border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .map-controls {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    min-width: auto;
+    padding: 1rem;
+  }
+  
+  .info-panel {
+    top: auto;
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    width: auto;
+    max-height: 300px;
+  }
+}
