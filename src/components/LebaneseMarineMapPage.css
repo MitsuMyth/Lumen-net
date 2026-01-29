@@ -1200,6 +1200,17 @@
     width: 300px;
     max-height: 50vh;
   }
+
+  .view-toggle {
+    top: 20px;
+    right: 10px;
+    gap: 0.3rem;
+  }
+
+  .toggle-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1213,5 +1224,45 @@
     max-height: 40vh;
     border-radius: 15px 15px 0 0;
     z-index: 1000;
+  }
+
+  /* View toggle mobile styles */
+  .view-toggle {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    z-index: 1001;
+    gap: 0.3rem;
+    padding: 0.4rem;
+  }
+
+  .toggle-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  /* Hide locations sidebar when in 3D globe view on mobile */
+  .map-container:has(.globe-container) .locations-sidebar {
+    display: none;
+  }
+
+  /* Hide DVM section on mobile */
+  .dvm-section {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .view-toggle {
+    top: 75px;
+    padding: 0.3rem;
+    gap: 0.2rem;
+  }
+
+  .toggle-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.7rem;
   }
 }

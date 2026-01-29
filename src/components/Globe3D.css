@@ -630,35 +630,23 @@
 }
 
 @media (max-width: 768px) {
-  .globe-controls-panel {
-    width: calc(100% - 20px);
-    top: 10px;
-    right: 10px;
-    left: 10px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .control-section {
-    flex: 1;
-    min-width: 200px;
-    padding-bottom: 0;
-    border-bottom: none;
-    border-right: 1px solid rgba(59, 232, 176, 0.1);
-  }
-
-  .control-section:last-child {
-    border-right: none;
-  }
-
+  /* Hide all control panels and legends on mobile - just show the globe */
+  .globe-controls-panel,
   .globe-legend-panel {
-    width: calc(100% - 20px);
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
+    display: none;
   }
 
+  /* Make globe take full space */
+  .globe-container {
+    border-radius: 0;
+  }
+
+  .globe-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Keep markers visible but smaller */
   .marker-label {
     font-size: 10px;
     padding: 3px 8px;
@@ -671,6 +659,104 @@
 
   .marker-score {
     font-size: 14px;
+  }
+
+  /* Adjust tooltips for mobile */
+  .globe-tooltip {
+    min-width: 240px;
+    max-width: 280px;
+    padding: 12px;
+  }
+
+  .tooltip-header {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+  }
+
+  .tooltip-icon {
+    font-size: 24px;
+  }
+
+  .tooltip-title {
+    font-size: 14px;
+  }
+
+  .tooltip-stat {
+    padding: 6px 10px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
+
+  .stat-value {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small phones - keep it minimal */
+  .globe-tooltip {
+    min-width: 200px;
+    max-width: 240px;
+    padding: 10px;
+  }
+
+  .tooltip-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .tooltip-icon {
+    font-size: 20px;
+  }
+
+  .tooltip-title {
+    font-size: 13px;
+  }
+
+  .tooltip-stats {
+    gap: 6px;
+  }
+
+  .tooltip-stat {
+    padding: 5px 8px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+
+  .stat-value {
+    font-size: 11px;
+  }
+
+  .tooltip-description {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .tooltip-action {
+    margin-top: 0.5rem;
+    padding: 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  /* Make marker pins smaller on very small screens */
+  .marker-pin {
+    width: 28px;
+    height: 28px;
+  }
+
+  .marker-score {
+    font-size: 12px;
+  }
+
+  .marker-label {
+    font-size: 9px;
+    padding: 2px 6px;
   }
 }
 
