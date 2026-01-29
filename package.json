@@ -4,13 +4,17 @@
   "description": "Interactive web app exploring how artificial light affects Diel Vertical Migration in the ocean",
   "private": true,
   "dependencies": {
+    "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^1.12.39",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
     "leaflet": "^1.9.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-globe.gl": "^2.37.0",
+    "react-scripts": "5.0.1",
+    "three": "^0.182.0"
   },
   "scripts": {
     "start": "react-scripts start",

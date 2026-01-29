@@ -1,125 +1,149 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
 
-const Home = () => {
-  const [particles, setParticles] = useState([]);
+const Home = ({ setCurrentPage }) => {
+  const [counts, setCounts] = useState({
+    biomass: 0,
+    carbon: 0,
+    depth: 0
+  });
 
   useEffect(() => {
-    // Generate particles on mount
-    const newParticles = [];
-    for (let i = 0; i < 50; i++) {
-      newParticles.push({
-        id: i,
-        size: Math.random() * 4 + 2,
-        left: Math.random() * 100,
-        delay: Math.random() * 15,
-        duration: Math.random() * 10 + 10
-      });
-    }
-    setParticles(newParticles);
+    const duration = 2000;
+    const targets = {
+      biomass: 10,
+      carbon: 35,
+      depth: 400
+    };
+
+    const increment = (key, target) => {
+      const steps = 60;
+      const stepValue = target / steps;
+      let current = 0;
+      const timer = setInterval(() => {
+        current += stepValue;
+        if (current >= target) {
+          setCounts(prev => ({ ...prev, [key]: target }));
+          clearInterval(timer);
+        } else {
+          setCounts(prev => ({ ...prev, [key]: Math.floor(current) }));
+        }
+      }, duration / steps);
+    };
+
+    setTimeout(() => {
+      increment('biomass', 10);
+      increment('carbon', 35);
+      increment('depth', 400);
+    }, 500);
   }, []);
 
   return (
-    <div className="home-page">
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="ocean-background">
-          <div className="particles-container">
-            {particles.map(particle => (
-              <div
-                key={particle.id}
-                className="particle"
-                style={{
-                  width: `${particle.size}px`,
-                  height: `${particle.size}px`,
-                  left: `${particle.left}%`,
-                  animationDelay: `${particle.delay}s`,
-                  animationDuration: `${particle.duration}s`
-                }}
-              />
-            ))}
-          </div>
-          <div className="wave-overlay" />
-        </div>
-        
-        <div className="hero-content">
-          <h1 className="hero-title">
-            The Ocean Has a <span className="highlight">Nightlife</span><br />
-            We're Dimming It.
-          </h1>
-          <p className="hero-subtitle">
-            Exploring how artificial light disrupts the ocean's nightly rhythm
-          </p>
-          <button className="cta-button" onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}>
-            <span>Explore the Impact</span>
-            <span className="arrow">→</span>
-          </button>
-        </div>
-        
-        <div className="scroll-indicator">
-          <span>Scroll to explore</span>
-          <div className="scroll-arrow">↓</div>
-        </div>
-      </section>
+    <div className="home-page-new">
+      {/* Floating Ocean Particles */}
+      <div className="ocean-particles">
+        <div className="particle" style={{ left: '5%', animationDelay: '0s', animationDuration: '15s' }}></div>
+        <div className="particle" style={{ left: '15%', animationDelay: '2s', animationDuration: '18s' }}></div>
+        <div className="particle" style={{ left: '25%', animationDelay: '4s', animationDuration: '20s' }}></div>
+        <div className="particle" style={{ left: '35%', animationDelay: '1s', animationDuration: '17s' }}></div>
+        <div className="particle" style={{ left: '45%', animationDelay: '3s', animationDuration: '19s' }}></div>
+        <div className="particle" style={{ left: '55%', animationDelay: '5s', animationDuration: '16s' }}></div>
+        <div className="particle" style={{ left: '65%', animationDelay: '2.5s', animationDuration: '21s' }}></div>
+        <div className="particle" style={{ left: '75%', animationDelay: '4.5s', animationDuration: '18s' }}></div>
+        <div className="particle" style={{ left: '85%', animationDelay: '1.5s', animationDuration: '22s' }}></div>
+        <div className="particle" style={{ left: '95%', animationDelay: '3.5s', animationDuration: '17s' }}></div>
 
-      {/* Explanation Section */}
-      <section className="explanation">
-        <div className="container">
-          <div className="explanation-grid">
-            <div className="explanation-card fade-in">
-              <div className="card-icon">🌙</div>
-              <p>
-                Every night, billions of organisms rise and fall through the ocean — 
-                a process called <strong>Diel Vertical Migration</strong>.
-              </p>
-            </div>
-            <div className="explanation-card fade-in" style={{ animationDelay: '0.2s' }}>
-              <div className="card-icon">💡</div>
-              <p>
-                Artificial light from ships and cities is <strong>disrupting this rhythm</strong>, 
-                affecting the entire marine food web.
-              </p>
-            </div>
-            <div className="explanation-card fade-in" style={{ animationDelay: '0.4s' }}>
-              <div className="card-icon">🗺️</div>
-              <p>
-                Explore how the ocean's glow has changed and discover areas at risk 
-                across the globe.
-              </p>
+        {/* Larger ambient particles */}
+        <div className="particle large" style={{ left: '10%', animationDelay: '6s', animationDuration: '25s' }}></div>
+        <div className="particle large" style={{ left: '40%', animationDelay: '8s', animationDuration: '28s' }}></div>
+        <div className="particle large" style={{ left: '70%', animationDelay: '10s', animationDuration: '23s' }}></div>
+        <div className="particle large" style={{ left: '90%', animationDelay: '12s', animationDuration: '26s' }}></div>
+      </div>
+
+      {/* Hero Section */}
+      <section className="hero-professional">
+        <div className="container-new">
+          <div className="hero-content-professional">
+            <h1 className="hero-title-professional">
+              The ocean has a nightlife we're <span className="gradient-text">dimming it</span>
+            </h1>
+
+            <div className="hero-cta">
+              <button className="btn-primary-pro" onClick={() => setCurrentPage && setCurrentPage('map')}>
+                Explore the Map
+              </button>
+              <button className="btn-secondary-pro" onClick={() => setCurrentPage && setCurrentPage('learn')}>
+                Learn More
+              </button>
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="stats">
-        <div className="container">
+      <section className="stats-section">
+        <div className="container-new">
           <div className="stats-grid">
             <div className="stat-item">
-              <div className="stat-number">10 Billion</div>
-              <div className="stat-label">Tons of biomass migrate nightly</div>
+              <div className="stat-number">{counts.biomass} Billion</div>
+              <div className="stat-label">Tons of Biomass Affected Daily</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">400m</div>
-              <div className="stat-label">Depth range of migration</div>
+              <div className="stat-number">{counts.carbon}%</div>
+              <div className="stat-label">Carbon Sequestration Loss</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">70%</div>
-              <div className="stat-label">Of ocean surface affected by light</div>
+              <div className="stat-number">{counts.depth}m</div>
+              <div className="stat-label">Depth of DVM Suppression</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Impact Section */}
+      <section className="impact-section">
+        <div className="container-new">
+          <div className="impact-content">
+            <h2>Why This Matters</h2>
+            <p>
+              Diel Vertical Migration is the largest daily migration of biomass on Earth.
+              Artificial light disrupts this natural rhythm, affecting marine ecosystems,
+              carbon sequestration, and ocean health worldwide.
+            </p>
+            <div className="impact-highlights">
+              <div className="highlight-item">
+                <div className="highlight-icon">🌊</div>
+                <h3>Ocean Ecosystems</h3>
+                <p>Disrupted feeding patterns affect the entire marine food web</p>
+              </div>
+              <div className="highlight-item">
+                <div className="highlight-icon">🌍</div>
+                <h3>Climate Impact</h3>
+                <p>Reduced carbon sequestration worsens climate change</p>
+              </div>
+              <div className="highlight-item">
+                <div className="highlight-icon">🔬</div>
+                <h3>Scientific Data</h3>
+                <p>Real-time monitoring helps us understand and mitigate impacts</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="cta-section">
-        <div className="container">
-          <h2>Ready to explore the data?</h2>
-          <p>Discover which ocean regions are most affected by artificial light pollution</p>
-          <button className="cta-button secondary">
-            <span>Open Interactive Map</span>
-            <span className="arrow">→</span>
-          </button>
+      <section className="cta-professional">
+        <div className="container-new">
+          <div className="cta-content-pro">
+            <h2>Explore Marine Light Pollution Data</h2>
+            <p>
+              Discover how artificial light is disrupting the world's largest biomass migration
+            </p>
+            <div className="cta-buttons-pro">
+              <button className="btn-primary-pro large" onClick={() => setCurrentPage && setCurrentPage('map')}>View Interactive Map</button>
+              <button className="btn-secondary-pro large" onClick={() => setCurrentPage && setCurrentPage('learn')}>Learn About DVM</button>
+            </div>
+          </div>
         </div>
       </section>
     </div>

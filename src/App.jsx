@@ -11,13 +11,13 @@ function App() {
   const renderPage = () => {
     switch(currentPage) {
       case 'home':
-        return <Home />;
+        return <Home setCurrentPage={setCurrentPage} />;
       case 'map':
         return <MapPage />;
       case 'learn':
         return <Learn />;
       default:
-        return <Home />;
+        return <Home setCurrentPage={setCurrentPage} />;
     }
   };
 
@@ -26,9 +26,8 @@ function App() {
       {/* Navigation */}
       <nav className="navbar">
         <div className="nav-container">
-          <div className="logo">
-            <span className="logo-icon">🌊</span>
-            <span className="logo-text">LumenNet</span>
+          <div className="logo" onClick={() => setCurrentPage('home')}>
+            <img src="/Lumenet.png" alt="LumenNet" className="logo-image" />
           </div>
           <ul className="nav-links">
             <li>
