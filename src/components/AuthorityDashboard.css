@@ -220,6 +220,14 @@
   box-shadow: 0 6px 16px rgba(30, 136, 229, 0.4);
 }
 
+.marker-icon-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
 .marker-pulse {
   position: absolute;
   width: 100%;

@@ -24,7 +24,6 @@ const AuthorityDashboard = () => {
 
       // Add device markers
       l1Devices.forEach(device => {
-        const isWater = device.type === 'water';
         const statusColor =
           device.status === 'normal' ? '#00D4C8' :
           device.status === 'warning' ? '#FFA500' :
@@ -34,7 +33,7 @@ const AuthorityDashboard = () => {
           className: 'custom-device-marker',
           html: `
             <div class="device-marker ${device.type}" style="border-color: ${statusColor};">
-              <div class="marker-icon">${isWater ? '🌊' : '🏖️'}</div>
+              <img src="/L1.jpeg" alt="L1" class="marker-icon-image" />
               <div class="marker-pulse" style="border-color: ${statusColor};"></div>
             </div>
           `,
