@@ -26,50 +26,48 @@ function App() {
 
   return (
     <div className="App">
-      {/* Navigation - Hidden on Dashboard */}
-      {currentPage !== 'dashboard' && (
-        <nav className="navbar">
-          <div className="nav-container">
-            <div className="logo" onClick={() => setCurrentPage('home')}>
-              <img src="/Lumenet.png" alt="LumenNet" className="logo-image" />
-            </div>
-            <ul className="nav-links">
-              <li>
-                <button
-                  className={currentPage === 'home' ? 'active' : ''}
-                  onClick={() => setCurrentPage('home')}
-                >
-                  Home
-                </button>
-              </li>
-              <li>
-                <button
-                  className={currentPage === 'map' ? 'active' : ''}
-                  onClick={() => setCurrentPage('map')}
-                >
-                  Map
-                </button>
-              </li>
-              <li>
-                <button
-                  className={currentPage === 'learn' ? 'active' : ''}
-                  onClick={() => setCurrentPage('learn')}
-                >
-                  Learn
-                </button>
-              </li>
-              <li>
-                <button
-                  className={currentPage === 'dashboard' ? 'active' : ''}
-                  onClick={() => setCurrentPage('dashboard')}
-                >
-                  Dashboard
-                </button>
-              </li>
-            </ul>
+      {/* Navigation */}
+      <nav className="navbar">
+        <div className="nav-container">
+          <div className="logo" onClick={() => setCurrentPage('home')}>
+            <img src="/Lumenet.png" alt="LumenNet" className="logo-image" />
           </div>
-        </nav>
-      )}
+          <ul className="nav-links">
+            <li>
+              <button
+                className={currentPage === 'home' ? 'active' : ''}
+                onClick={() => setCurrentPage('home')}
+              >
+                Home
+              </button>
+            </li>
+            <li>
+              <button
+                className={currentPage === 'map' ? 'active' : ''}
+                onClick={() => setCurrentPage('map')}
+              >
+                Map
+              </button>
+            </li>
+            <li>
+              <button
+                className={currentPage === 'learn' ? 'active' : ''}
+                onClick={() => setCurrentPage('learn')}
+              >
+                Learn
+              </button>
+            </li>
+            <li>
+              <button
+                className={currentPage === 'dashboard' ? 'active' : ''}
+                onClick={() => setCurrentPage('dashboard')}
+              >
+                Dashboard
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
       {/* Page Content */}
       {renderPage()}

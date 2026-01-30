@@ -196,6 +196,12 @@ const AuthorityDashboard = () => {
                 <p className="last-update">Last update: {new Date(selectedDevice.lastUpdate).toLocaleTimeString()}</p>
               </div>
 
+              {/* Device Image */}
+              <div className="device-image-section">
+                <img src="/L1.jpeg" alt="Lumenet L1 Device" className="device-image" />
+                <p className="image-caption">Lumenet L1 Multi-Sensor Station</p>
+              </div>
+
               {/* Device Status */}
               <div className="info-section">
                 <h4>Device Health</h4>
@@ -393,12 +399,6 @@ const AuthorityDashboard = () => {
                   </p>
                 </div>
               )}
-
-              {/* Device Image */}
-              <div className="device-image-section">
-                <img src="/L1.jpeg" alt="Lumenet L1 Device" className="device-image" />
-                <p className="image-caption">Lumenet L1 Multi-Sensor Station</p>
-              </div>
             </div>
           ) : (
             <div className="no-selection">
