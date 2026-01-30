@@ -106,7 +106,9 @@ const AuthorityDashboard = () => {
       {/* Fleet Summary Stats */}
       <div className="fleet-summary">
         <div className="summary-card">
-          <div className="card-icon">🌊</div>
+          <div className="card-icon card-icon-image">
+            <img src="/L1.jpeg" alt="L1 Device" className="summary-device-image" />
+          </div>
           <div className="card-content">
             <div className="card-value">{fleetSummary.waterDevices}</div>
             <div className="card-label">L1 Devices Active</div>
