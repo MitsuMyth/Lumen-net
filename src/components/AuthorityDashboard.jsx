@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import L from 'leaflet';
-import { l1Devices, getFleetSummary } from '../data/deviceData';
+import { l1Devices, getFleetSummary, updateSensorData } from '../data/deviceData';
 import './AuthorityDashboard.css';
 
 const AuthorityDashboard = () => {
@@ -62,14 +62,26 @@ const AuthorityDashboard = () => {
     };
   }, []);
 
-  // Simulate real-time updates
+  // Simulate real-time sensor data updates
   useEffect(() => {
     const interval = setInterval(() => {
+      // Update sensor data
+      updateSensorData();
+
+      // Update fleet summary
       setFleetSummary(getFleetSummary());
-    }, 5000);
+
+      // If a device is selected, update it with fresh data
+      if (selectedDevice) {
+        const updatedDevice = l1Devices.find(d => d.id === selectedDevice.id);
+        if (updatedDevice) {
+          setSelectedDevice({...updatedDevice});
+        }
+      }
+    }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [selectedDevice]);
 
   const getStatusColor = (status) => {
     switch (status) {

@@ -297,6 +297,123 @@ export const l1Devices = [
   }
 ];
 
+// Helper function to generate realistic variations
+const getRandomVariation = (base, range) => {
+  const variation = (Math.random() - 0.5) * 2 * range;
+  return parseFloat((base + variation).toFixed(2));
+};
+
+// Determine light pollution index based on light intensity
+const getLightPollutionIndex = (lightIntensity) => {
+  if (lightIntensity < 0.1) return 'low';
+  if (lightIntensity < 0.25) return 'medium';
+  if (lightIntensity < 0.5) return 'high';
+  return 'critical';
+};
+
+// Update sensor readings with realistic variations and logical correlations
+export const updateSensorData = () => {
+  l1Devices.forEach(device => {
+    if (device.type === 'water') {
+      // Update CO2 levels (±1 ppm variation for 1-second updates)
+      const baseCO2 = device.id === 'L1-001' ? 412 :
+                      device.id === 'L1-002' ? 418 :
+                      device.id === 'L1-003' ? 428 :
+                      device.id === 'L1-004' ? 408 : 415;
+      const newCO2 = Math.round(getRandomVariation(baseCO2, 1));
+
+      // Update CO2 trend based on actual change
+      const co2Change = newCO2 - device.sensors.co2Level;
+      device.sensors.co2Level = newCO2;
+      device.sensors.co2Trend = co2Change > 0.5 ? 'rising' : co2Change < -0.5 ? 'falling' : 'stable';
+
+      // Update light intensity (±0.01 lux variation)
+      const baseLight = device.id === 'L1-001' ? 0.08 :
+                        device.id === 'L1-002' ? 0.12 :
+                        device.id === 'L1-003' ? 0.35 :
+                        device.id === 'L1-004' ? 0.05 : 0.09;
+      device.sensors.lightIntensity = getRandomVariation(baseLight, 0.01);
+
+      // Update light pollution index based on intensity (logical correlation)
+      device.sensors.lightPollutionIndex = getLightPollutionIndex(device.sensors.lightIntensity);
+
+      // Update light wavelength (±2 nm variation)
+      const baseWavelength = device.id === 'L1-001' ? 520 :
+                             device.id === 'L1-002' ? 515 :
+                             device.id === 'L1-003' ? 510 :
+                             device.id === 'L1-004' ? 525 : 518;
+      device.sensors.lightWavelength = Math.round(getRandomVariation(baseWavelength, 2));
+
+      // DVM migration active depends on light pollution (logical correlation)
+      const isLowPollution = device.sensors.lightPollutionIndex === 'low' ||
+                             device.sensors.lightPollutionIndex === 'medium';
+      device.sensors.dvmMigrationActive = isLowPollution;
+
+      // Update biomass density (±5 units variation) - higher when DVM is active
+      const baseBiomass = device.id === 'L1-001' ? 245 :
+                          device.id === 'L1-002' ? 198 :
+                          device.id === 'L1-003' ? 142 :
+                          device.id === 'L1-004' ? 312 : 267;
+      const biomassBoost = device.sensors.dvmMigrationActive ? 1.0 : 0.7;
+      device.sensors.biomassDensity = Math.round(getRandomVariation(baseBiomass * biomassBoost, 5));
+
+      // Update DVM depth (±3 meters variation) - correlates with migration activity
+      const baseDepth = device.id === 'L1-001' ? 180 :
+                        device.id === 'L1-002' ? 165 :
+                        device.id === 'L1-003' ? 95 :
+                        device.id === 'L1-004' ? 220 : 195;
+      const depthAdjustment = device.sensors.dvmMigrationActive ? 1.0 : 0.6;
+      device.sensors.dvmDepth = Math.round(getRandomVariation(baseDepth * depthAdjustment, 3));
+
+      // Vertical movement only when DVM is active (logical correlation)
+      if (device.sensors.dvmMigrationActive) {
+        const movementRandom = Math.random();
+        device.sensors.verticalMovement = movementRandom > 0.6 ? 'ascending' :
+                                          movementRandom > 0.3 ? 'stable' : 'descending';
+      } else {
+        device.sensors.verticalMovement = 'stable';
+      }
+
+      // Update DVM protection status based on migration activity
+      device.impact.dvmProtectionStatus = device.sensors.dvmMigrationActive ? 'protected' : 'at-risk';
+
+      // Update carbon removal based on biomass and DVM activity (logical correlation)
+      const carbonBase = device.id === 'L1-001' ? 2.4 :
+                         device.id === 'L1-002' ? 1.9 :
+                         device.id === 'L1-003' ? 0.8 :
+                         device.id === 'L1-004' ? 3.2 : 2.7;
+      const carbonMultiplier = (device.sensors.biomassDensity / 200) * (device.sensors.dvmMigrationActive ? 1.0 : 0.5);
+      device.impact.carbonRemovalDaily = parseFloat((carbonBase * carbonMultiplier).toFixed(1));
+
+      // Update fishery health based on biomass and DVM status
+      if (device.sensors.biomassDensity > 250 && device.sensors.dvmMigrationActive) {
+        device.impact.fisheryHealth = 'excellent';
+      } else if (device.sensors.biomassDensity > 180 && device.sensors.dvmMigrationActive) {
+        device.impact.fisheryHealth = 'good';
+      } else if (device.sensors.biomassDensity > 120) {
+        device.impact.fisheryHealth = 'moderate';
+      } else {
+        device.impact.fisheryHealth = 'poor';
+      }
+
+      // Update last update timestamp
+      device.lastUpdate = new Date().toISOString();
+    } else if (device.type === 'land') {
+      // Update land station sensors (smaller variations)
+      const baseCO2 = device.id === 'REF-001' ? 425 : 422;
+      device.sensors.co2Level = Math.round(getRandomVariation(baseCO2, 0.5));
+
+      const baseLight = device.id === 'REF-001' ? 42.5 : 38.2;
+      device.sensors.lightIntensity = getRandomVariation(baseLight, 0.5);
+
+      const baseWavelength = device.id === 'REF-001' ? 580 : 575;
+      device.sensors.lightWavelength = Math.round(getRandomVariation(baseWavelength, 1));
+
+      device.lastUpdate = new Date().toISOString();
+    }
+  });
+};
+
 // Fleet Summary Statistics
 export const getFleetSummary = () => {
   const waterDevices = l1Devices.filter(d => d.type === 'water');
