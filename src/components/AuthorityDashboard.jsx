@@ -26,7 +26,7 @@ const AuthorityDashboard = () => {
       l1Devices.forEach(device => {
         const isWater = device.type === 'water';
         const statusColor =
-          device.status === 'normal' ? '#3BE8B0' :
+          device.status === 'normal' ? '#00D4C8' :
           device.status === 'warning' ? '#FFA500' :
           '#F25C54';
 
@@ -74,7 +74,7 @@ const AuthorityDashboard = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'normal': return '#3BE8B0';
+      case 'normal': return '#00D4C8';
       case 'warning': return '#FFA500';
       case 'offline': return '#F25C54';
       default: return '#8FA8B8';
@@ -82,7 +82,7 @@ const AuthorityDashboard = () => {
   };
 
   const getBatteryColor = (percent) => {
-    if (percent >= 80) return '#3BE8B0';
+    if (percent >= 80) return '#00D4C8';
     if (percent >= 50) return '#FFD93D';
     if (percent >= 30) return '#FFA500';
     return '#F25C54';
@@ -294,7 +294,7 @@ const AuthorityDashboard = () => {
                           className="pollution-badge"
                           style={{
                             background:
-                              selectedDevice.sensors.lightPollutionIndex === 'low' ? '#3BE8B0' :
+                              selectedDevice.sensors.lightPollutionIndex === 'low' ? '#00D4C8' :
                               selectedDevice.sensors.lightPollutionIndex === 'medium' ? '#FFD93D' :
                               selectedDevice.sensors.lightPollutionIndex === 'high' ? '#FFA500' :
                               '#F25C54'
@@ -330,7 +330,7 @@ const AuthorityDashboard = () => {
                         <span
                           className="dvm-status-badge"
                           style={{
-                            background: selectedDevice.sensors.dvmMigrationActive ? '#3BE8B0' : '#FFA500'
+                            background: selectedDevice.sensors.dvmMigrationActive ? '#00D4C8' : '#FFA500'
                           }}
                         >
                           {selectedDevice.sensors.dvmMigrationActive ? '✅ Active Migration' : '⚠️ Migration Suppressed'}
